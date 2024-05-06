@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 interface FooterProps {
   isFavorite: boolean;
   title: string;
-  authorLabel?: string;
+  authorLabel: string;
   createdAtLabel: string;
   onClick: () => void;
   disabled: boolean;
@@ -19,12 +19,13 @@ export const Footer = ({
   onClick,
   disabled,
 }: FooterProps) => {
-  const handleClick = (
+  const handleCLick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.stopPropagation();
     event.preventDefault();
-    onClick();
+
+    onClick()
   };
 
   return (
@@ -34,15 +35,16 @@ export const Footer = ({
         {authorLabel}, {createdAtLabel}
       </p>
       <button
+        title="Add to favorites"
+        disabled={disabled}
+        onClick={handleCLick}
         className={cn(
-          "opacity-0 group-hover:opacity-100 transition absolute top-3 right-3 text-muted-foreground hover:text-blue-600",
+          "opacity-0 group-hover:opacity-100 transition absolute right-3 top-3 text-muted-foreground hover:text-blue-600",
           disabled && "cursor-not-allowed opacity-75"
         )}
-        onClick={handleClick}
-        disabled={disabled}
       >
         <Star
-          className={cn("h-4 w-4", isFavorite && "text-blue-600 fill-blue-600")}
+          className={cn("h-4 w-4", isFavorite && "fill-blue-600 text-blue-600")}
         />
       </button>
     </div>

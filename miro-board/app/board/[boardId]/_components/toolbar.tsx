@@ -1,6 +1,6 @@
 import {
   Circle,
-  MousePointer2,
+  MousePointer,
   Pencil,
   Redo2,
   Square,
@@ -9,11 +9,12 @@ import {
   Undo2,
 } from "lucide-react";
 import { ToolButton } from "./tool-button";
+
 import { CanvasMode, CanvasState, LayerType } from "@/types/canvas";
 
 interface ToolbarProps {
   canvasState: CanvasState;
-  setCanvasState: (state: CanvasState) => void;
+  setCanvasState: React.Dispatch<React.SetStateAction<CanvasState>>;
   undo: () => void;
   redo: () => void;
   canUndo: boolean;
@@ -30,10 +31,10 @@ export const Toolbar = ({
 }: ToolbarProps) => {
   return (
     <div className="absolute top-[50%] -translate-y-[50%] left-2 flex flex-col gap-y-4">
-      <div className="bg-white rounded-md p-1.5 flex gap-y-1 flex-col items-center shadow-md">
+      <div className="bg-white rounded-md p-1.5 flex gap-y-1  flex-col items-center shadow-md">
         <ToolButton
           label="Select"
-          icon={MousePointer2}
+          icon={MousePointer}
           onClick={() => setCanvasState({ mode: CanvasMode.None })}
           isActive={
             canvasState.mode === CanvasMode.None ||
@@ -77,16 +78,16 @@ export const Toolbar = ({
           onClick={() =>
             setCanvasState({
               mode: CanvasMode.Inserting,
-              layerType: LayerType.Reactangle,
+              layerType: LayerType.Rectangle,
             })
           }
           isActive={
             canvasState.mode === CanvasMode.Inserting &&
-            canvasState.layerType === LayerType.Reactangle
+            canvasState.layerType === LayerType.Rectangle
           }
         />
         <ToolButton
-          label="Ellipses"
+          label="Ellipse"
           icon={Circle}
           onClick={() =>
             setCanvasState({
@@ -107,7 +108,9 @@ export const Toolbar = ({
               mode: CanvasMode.Pencil,
             })
           }
-          isActive={canvasState.mode === CanvasMode.Pencil}
+          isActive={
+            canvasState.mode === CanvasMode.Pencil
+          }
         />
       </div>
       <div className="bg-white rounded-md p-1.5 flex flex-col items-center shadow-md">

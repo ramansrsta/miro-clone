@@ -1,10 +1,6 @@
-import { init } from "next/dist/compiled/webpack/webpack";
 import { create } from "zustand";
 
-const defaultValues = {
-  id: "",
-  title: "",
-};
+const defaultValues = {id :"", title: ""};
 
 interface IRenameModal {
   isOpen: boolean;
@@ -16,19 +12,6 @@ interface IRenameModal {
 export const useRenameModal = create<IRenameModal>((set) => ({
   isOpen: false,
   initialValues: defaultValues,
-  onOpen: (id, title) => {
-    set({
-      isOpen: true,
-      initialValues: {
-        id,
-        title,
-      },
-    });
-  },
-  onClose: () => {
-    set({
-      isOpen: false,
-      initialValues: defaultValues,
-    });
-  },
-}));
+  onOpen: (id, title) => set({isOpen: true, initialValues: {id, title}}),
+  onClose: () => set({isOpen: false, initialValues: defaultValues}),
+}))

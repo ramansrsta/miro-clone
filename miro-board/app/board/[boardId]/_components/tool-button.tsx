@@ -17,8 +17,8 @@ export const ToolButton = ({
   label,
   icon: Icon,
   onClick,
-  isActive,
-  isDisabled,
+  isActive = false,
+  isDisabled = false,
 }: ToolButtonProps) => {
   return (
     <Hint label={label} side="right" sideOffset={14}>
@@ -28,7 +28,7 @@ export const ToolButton = ({
         size="icon"
         variant={isActive ? "boardActive" : "board"}
       >
-        <Icon />
+        <Icon/>
       </Button>
     </Hint>
   );
